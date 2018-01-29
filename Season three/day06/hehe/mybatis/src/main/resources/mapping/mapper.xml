@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hehe.mybatis.dao.StudentDao">
+    <insert id="insert" parameterType="com.hehe.mybatis.entity.Student">
+        insert into student(name, age, score) values (#{name}, #{age}, #{score})
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM student where id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE student SET name = #{name}, age = #{age}, score = #{score} WHERE id = #{id}
+    </update>
+
+    <insert id="insertForId" parameterType="com.hehe.mybatis.entity.Student">
+        INSERT into student(name,age,score) VALUES (#{name}, #{age}, #{score})
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+    </insert>
+
+    <select id="selectAll" resultType="com.hehe.mybatis.entity.Student">
+        SELECT id, name, age, score FROM student
+    </select>
+
+    <!--<select id="selectById">-->
+        <!--SELECT  id, name, age, score FROM  student WHERE id = #{}-->
+    <!--</select>-->
+</mapper>

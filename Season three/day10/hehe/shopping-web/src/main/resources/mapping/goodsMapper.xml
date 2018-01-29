@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hehe.shoppingweb.dao.GoodsDao">
+    <select id="findById" resultType="com.hehe.shoppingweb.entity.Goods">
+        SELECT
+          id,
+          pid,
+          name,
+          price,
+          count,
+          picture
+        FROM
+          goods
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByPid" resultType="com.hehe.shoppingweb.entity.Goods">
+        SELECT
+            id,
+            pid,
+            name,
+            price,
+            count,
+            picture
+        FROM
+          goods
+        WHERE pid = #{pid}
+    </select>
+
+    <insert id="insert">
+       INSERT INTO goods (pid, name, price, count, picture)
+        VALUES
+          (#{pid}, #{name},#{price},#{count}, #{picture}) ;
+    </insert>
+
+    <update id="update">
+        UPDATE
+          goods
+        SET
+          pid = #{pid},
+          name = #{name},
+          price = #{price},
+          count= #{count},
+          picture = #{picture}
+        WHERE id = #{id}
+    </update>
+</mapper>

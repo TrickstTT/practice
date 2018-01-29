@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hehe.mybatis.dao.CountryDao">
+
+    <resultMap id="countryMap" type="com.hehe.mybatis.entity.Country">
+        <id column="cid" property="id"/>
+        <result column="cname" property="name"/>
+        <collection property="provinces" ofType="com.hehe.mybatis.entity.Province">
+            <id column="pid" property="id"/>
+            <result column="pname" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectCountryById" resultMap="countryMap">
+        SELECT
+          c.id AS cid,
+          c.name AS cname,
+          p.name AS pname,
+          p.id AS  pid
+        FROM
+          country AS c, province AS p
+        WHERE
+          c.id = #{cid} AND p.country_id = c.id
+    </select>
+
+</mapper>
